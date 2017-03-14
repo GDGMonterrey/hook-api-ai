@@ -12,12 +12,12 @@ module.exports = {
 			.then(function(autos){
 				var responseBody = { source: "Mofles Inc" }
 				if (!autos.length){
-					responseBody.speech = "No hay autos que coincidan con la busqueda";
-					responseBody.displayText = "No encontramos este auto";
+					responseBody.speech = "There are not matches";
+					responseBody.displayText = "There are not matches";
 				} else {
 					if (autos.length === 1){
-						responseBody.speech = "El auto "+ autos[0].modelo + " tiene las siguientes caracteristicas " + autos[0].detalles;
-						responseBody.displayText = "Encontramos un auto :)";
+						responseBody.speech = autos[0].modelo + " " + autos[0].detalles;
+						responseBody.displayText = "We found a match";
 					} else {
 						listaAutos = "";
 						autos.forEach(function (auto) {
@@ -27,8 +27,8 @@ module.exports = {
 								listaAutos += ", " + auto.modelo;
 							}
 						});
-						responseBody.speech = "Encontramos los siguientes autos que coinciden con tu búsqueda " + listaAutos ;
-						responseBody.displayText = "Encontramos varias coincidencias";
+						responseBody.speech = "List of matches " + listaAutos ;
+						responseBody.displayText = "We found many matches";
 					}
 				}
 
