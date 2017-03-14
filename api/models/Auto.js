@@ -13,7 +13,8 @@ module.exports = {
   	rendimiento: 'integer',
   	capacidad : 'integer',
   	transmision : 'string',
-  	detalles : 'text'
+  	detalles : 'text',
+  	puertas : 'integer'
 
   }
 };
