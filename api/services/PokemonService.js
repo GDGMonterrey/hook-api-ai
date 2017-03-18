@@ -18,7 +18,7 @@ module.exports = {
 	getDebilidadTipo : function(tipoId) {
 		return PokemonService.getTipoByQuery({ id : tipoId })
 			.then(function (tipo) {
-				return PokemonService.getTipoByQuery ( { debilidad : tipo.debilidad })
+				return PokemonService.getTipoByQuery ( { id : tipo.debilidad })
 			});
 	},
 	getTipoByQuery : function(query) {
