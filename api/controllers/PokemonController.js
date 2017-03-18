@@ -8,10 +8,21 @@
 module.exports = {
 	webhook : function (req, res) {
 		const assistant = IntentsService.createApiAiAssistant(req, res);
-		const actionMap = new Map();
-		actionMap.set("pokebot-fight", IntentsService.pokebot_fight);
-		actionMap.set("pokebot-study", IntentsService.pokebot_study);
-		assistant.handleRequest(actionMap);
+		const intent = assistant.getIntent();
+		switch (intent) {
+			case "pokebot-fight":
+				IntentsService.pokebot_fight(assistant)
+					.then(function (responseBody) {
+						res.json(responseBody)
+					});
+				break;
+			case "pokebot-study":
+				IntentsService.pokebot_study(assistant)
+					.then(function (responseBody) {
+						res.json(responseBody)
+					});
+				break;
+			}
 	}
 };
 

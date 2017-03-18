@@ -11,12 +11,18 @@ module.exports = {
 
 	pokebot_fight : function (assistant) {
 		let query = {};
+		let responseBody = { source: "PokeMexa" }
 		query.nombre = assistant.getArgument(POKEMON_ARGUMENT);
 		PokemonService.getDebilidadPokemon(query)
 			.then(function (pokemon) {
-				assistant.tell(`Puedes usar a ${pokemon.nombre}`);
+				let message =`Puedes usar a ${pokemon.nombre}`;
+				responseBody.speech = message;
+				responseBody.displayText = message;
+				return responseBody;
 			}).catch(function (err) {
-				assistant.tell(ERROR_DIALOG);
+				responseBody.speech = ERROR_DIALOG;
+				responseBody.displayText = ERROR_DIALOG;
+				return responseBody;
 			});
 	},
 	pokebot_study : function (assistant) {
@@ -24,7 +30,10 @@ module.exports = {
 		query.nombre = assistant.getArgument(POKEMON_ARGUMENT);
 		PokemonService.getPokemonByQuery(query, true)
 			.then(function (pokemon) {
-				assistant.tell(`${pokemon.nombre} es un pokemon de tipo ${pokemon.tipo.nombre}`);
+				let message =`${pokemon.nombre} es un pokemon de tipo ${pokemon.tipo.nombre}`;
+				responseBody.speech = message;
+				responseBody.displayText = message;
+				return responseBody;
 			}).catch(function (err) {
 				assistant.tell(ERROR_DIALOG);
 			});
